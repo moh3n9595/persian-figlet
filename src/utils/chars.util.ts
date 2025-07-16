@@ -1,29 +1,22 @@
-import {LetterForm} from '../types';
+import {
+	CharacterPattern,
+	FontDefinition,
+	FontStyle,
+	LetterForm,
+	ProcessedCharacter,
+} from '../types';
 
+/** Standard space character for character separation */
 export const SPACE = '  ';
+/** Half space character for fine spacing adjustments */
 export const HALF_SPACE = ' ';
-export const CHAR_HEIGHT = 13; // Height of each character pattern
+/** Height of each character pattern in rows */
+export const CHAR_HEIGHT = 13;
 
-// Persian character patterns for different forms (6 rows high for better detail)
-export const persianPatterns: {
-	[key: string]: {
-		[key in LetterForm]: [
-			string,
-			string,
-			string,
-			string,
-			string,
-			string,
-			string,
-			string,
-			string,
-			string,
-			string,
-			string,
-			string,
-		];
-	};
-} = {
+/**
+ * Standard Persian font with traditional block character designs
+ */
+const standardFont: FontDefinition = {
 	ا: {
 		[LetterForm.ISOLATED]: [
 			'  ',
@@ -2196,9 +2189,28 @@ export const persianPatterns: {
 	},
 };
 
-// Get pattern for a character and form, with fallback
-export function getPattern(char: string, form: LetterForm): string[] {
-	const charPatterns = persianPatterns[char];
+/**
+ * Collection of all available fonts
+ */
+const fonts: Record<FontStyle, FontDefinition> = {
+	[FontStyle.STANDARD]: standardFont,
+};
+
+/**
+ * Get pattern for a character and form from specified font, with fallback
+ * @param char - The character to get pattern for
+ * @param form - The letter form to use
+ * @param fontStyle - The font style to use
+ * @returns Array of strings representing the character pattern
+ */
+export function getPattern(
+	char: string,
+	form: LetterForm,
+	fontStyle: FontStyle = FontStyle.STANDARD,
+): CharacterPattern {
+	const font = fonts[fontStyle];
+	const charPatterns = font[char];
+
 	if (charPatterns && charPatterns[form]) {
 		return charPatterns[form];
 	}
@@ -2208,10 +2220,12 @@ export function getPattern(char: string, form: LetterForm): string[] {
 		return charPatterns[LetterForm.ISOLATED];
 	}
 
-	return persianPatterns[' '][LetterForm.ISOLATED];
+	return font[' '][LetterForm.ISOLATED];
 }
 
-// Persian letters that don't connect to the following letter
+/**
+ * Persian letters that don't connect to the following letter
+ */
 export const NON_CONNECTING_LETTERS = new Set([
 	'ا',
 	'د',
@@ -2223,35 +2237,48 @@ export const NON_CONNECTING_LETTERS = new Set([
 	'آ',
 ]);
 
-// Check if a character is a Persian/Arabic letter
+/**
+ * Check if a character is a Persian/Arabic letter
+ * @param char - Character to check
+ * @returns True if the character is a Persian/Arabic letter
+ */
 export function isPersianLetter(char: string): boolean {
 	if (!char) return false;
 	const code = char.charCodeAt(0);
 
 	// Persian letters and Arabic block
 	const isArabicBase = code >= 0x0600 && code <= 0x06ff;
-
 	// Persian digits (۰–۹)
 	const isPersianDigit = code >= 0x06f0 && code <= 0x06f9;
 
 	return isArabicBase || isPersianDigit;
 }
 
-// Check if a letter can connect to the next letter
+/**
+ * Check if a letter can connect to the next letter
+ * @param char - Character to check
+ * @returns True if the character can connect to the next letter
+ */
 export function canConnectToNext(char: string): boolean {
 	return isPersianLetter(char) && !NON_CONNECTING_LETTERS.has(char);
 }
 
-// Check if a letter can connect to the previous letter
+/**
+ * Check if a letter can connect to the previous letter
+ * @param char - Character to check
+ * @returns True if the character can connect to the previous letter
+ */
 export function canConnectToPrev(char: string): boolean {
 	return isPersianLetter(char);
 }
 
-// Process a string of Persian text and return an array of characters with their forms
-export function processText(
-	text: string,
-): Array<{char: string; form: LetterForm}> {
-	const result: Array<{char: string; form: LetterForm}> = [];
+/**
+ * Process a string of Persian text and return an array of characters with their forms
+ * @param text - Persian text to process
+ * @returns Array of processed characters with their determined forms
+ */
+export function processText(text: string): ProcessedCharacter[] {
+	const result: ProcessedCharacter[] = [];
 	const chars = text.split('');
 
 	for (let i = 0; i < chars.length; i++) {
@@ -2292,15 +2319,16 @@ export function processText(
 		}
 
 		result.push({char: currentChar, form});
-		if (
-			form === LetterForm.FINAL &&
-			nextChar &&
-			nextChar !== ' ' &&
-			currentChar !== ' '
-		) {
-			console.log(currentChar, nextChar, form);
-			result.push({char: '__HALF_SPACE__', form: LetterForm.ISOLATED});
-		}
+
+		// Add half space after final form when appropriate
+		// if (
+		// 	form === LetterForm.FINAL &&
+		// 	nextChar &&
+		// 	nextChar !== ' ' &&
+		// 	currentChar !== ' '
+		// ) {
+		// 	result.push({char: '__HALF_SPACE__', form: LetterForm.ISOLATED});
+		// }
 	}
 
 	return result;

@@ -20,13 +20,13 @@
 
 ## ✨ Features
 
-- ✨ Convert Persian/Farsi text to ASCII art
-- 🔤 Support for all Persian alphabet characters
-- 📝 Proper handling of Persian text direction (RTL)
-- 🔗 Contextual letter forms (isolated, initial, medial, final)
-- 🎨 High-quality character patterns with 13-row height
-- 📦 TypeScript support with full type definitions
-- 🚀 Zero dependencies
+- 🎨 **Multiple Font Styles**: Standard and Slim fonts with distinct visual characteristics
+- 🔤 **Complete Persian Support**: All Persian letters with proper contextual forms
+- 🔗 **Smart Letter Connection**: Automatic handling of letter joining rules
+- 📝 **TypeScript Support**: Full type definitions and IntelliSense support
+- 🎯 **Easy to Use**: Simple API with sensible defaults
+- 🧪 **Well Tested**: Comprehensive test coverage
+- 📦 **Zero Dependencies**: Lightweight and self-contained
 
 ## ⚙️ Installation
 
@@ -43,13 +43,17 @@ yarn add persian-figlet
 ### Basic Usage
 
 ```typescript
-import { print } from 'persian-figlet';
+import { print, FontStyle } from 'persian-figlet';
 
-// Print Persian text as ASCII art
-const result = print('سلام');
+// Basic usage with default font
+print('سلام دنیا');
+
+// Using different fonts
+print('سلام دنیا', { font: FontStyle.STANDARD });
+
+// Silent mode (no console output)
+const result = print('سلام دنیا', { silent: true });
 console.log(result);
-
-// The function returns the ASCII art string and also logs it
 ```
 
 ### Example Output
@@ -60,13 +64,11 @@ print('تست');
 
 Will output beautiful ASCII art representation of the Persian text "تست".
 
-```
-                        
+```                     
   █ █               █ █ 
                         
 █     █   █   █   █    █
-████████████████████████
-                        
+████████████████████████                     
 ```
 
 ## 🙋 Contributing
