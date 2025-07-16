@@ -71,6 +71,22 @@ Will output beautiful ASCII art representation of the Persian text "تست".
 ████████████████████████                     
 ```
 
+## 🚀 Roadmap & Future Work
+
+1. **Add & Create More Fonts**  
+   - Design “Slim”, “Rounded” or “Shadow” variations  
+   - Allow community‑contributed font packs via a simple JSON schema  
+
+2. **Per‑Character Margins & Kerning**  
+   - Let each glyph declare a custom left/right “margin” override
+
+3. **Ligature & Diacritic Support**  
+   - Render optional diacritics above/below base letters
+  
+4. **Interactive Playground & Live Preview**  
+   - Web demo to type in Persian and see instant Figlet output  
+   - Let users tweak spacing, font, and colors in real time  
+
 ## 🙋 Contributing
 
 For help on setting up the repo locally, building, testing, and contributing

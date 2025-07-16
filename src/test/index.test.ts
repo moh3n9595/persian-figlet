@@ -4,6 +4,10 @@ import {FontStyle} from '../types';
 const text = 'تست';
 const longText = 'این یک متن فارسی برای تست عملکرد است';
 
+afterEach(() => {
+	vi.restoreAllMocks();
+});
+
 describe('Persian Figlet', () => {
 	it('should return a string output', () => {
 		const result = print(text);
