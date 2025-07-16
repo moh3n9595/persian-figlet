@@ -1,0 +1,81 @@
+{
+	"name": "persian-figlet",
+	"version": "0.1.0",
+	"description": "A Figlet-style ASCII art renderer for Persian (Farsi) text with full contextual character shaping and RTL support.",
+	"main": "./lib/persian-figlet.umd.js",
+	"module": "./lib/persian-figlet.es.js",
+	"types": "./lib/index.d.ts",
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./lib/persian-figlet.es.js",
+			"require": "./lib/persian-figlet.umd.js"
+		}
+	},
+	"scripts": {
+		"dev": "concurrently --kill-others -n Library,Tests \"yarn build:watch\" \"yarn test:watch\"",
+		"test:watch": "vitest --watch",
+		"test": "vitest run",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"prettier": "prettier --check .",
+		"prettier:fix": "prettier --write .",
+		"postinstall": "husky",
+		"prepack": "pinst --disable",
+		"postpack": "pinst --enable",
+		"build": "vite build",
+		"build:watch": "vite build --watch",
+		"release:info": "release-it --release-version",
+		"release": "release-it"
+	},
+	"keywords": [
+		"figlet",
+		"persian",
+		"farsi",
+		"ascii-art",
+		"unicode"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/moh3n9595/persian-figlet.git"
+	},
+	"homepage": "https://github.com/moh3n9595/persian-figlet#readme",
+	"bugs": {
+		"url": "https://github.com/moh3n9595/persian-figlet/issues"
+	},
+	"author": {
+		"name": "Mohsen Madani",
+		"email": "mohsenando@gmail.com"
+	},
+	"packageManager": "yarn@4.9.2",
+	"files": [
+		"lib"
+	],
+	"devDependencies": {
+		"@commitlint/cli": "^19.8.1",
+		"@commitlint/config-conventional": "^19.8.1",
+		"@eslint/js": "^9.31.0",
+		"@release-it/bumper": "^7.0.5",
+		"@release-it/conventional-changelog": "^10.0.1",
+		"@types/node": "^24.0.14",
+		"@vitest/coverage-v8": "^3.2.4",
+		"concurrently": "^9.2.0",
+		"conventional-changelog-conventionalcommits": "^9.1.0",
+		"eslint": "^9.31.0",
+		"eslint-config-prettier": "^10.1.5",
+		"eslint-plugin-import": "^2.32.0",
+		"eslint-plugin-prettier": "^5.5.1",
+		"eslint-plugin-unused-imports": "^4.1.4",
+		"husky": "^9.1.7",
+		"jsdom": "^26.1.0",
+		"pinst": "^3.0.0",
+		"prettier": "^3.6.2",
+		"release-it": "^19.0.3",
+		"typescript": "^5.8.3",
+		"typescript-eslint": "^8.37.0",
+		"vite": "^7.0.4",
+		"vite-plugin-dts": "^4.5.4",
+		"vitest": "^3.2.4"
+	}
+}
