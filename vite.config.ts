@@ -1,4 +1,5 @@
 /// <reference types="vitest" />
+import {codecovVitePlugin} from '@codecov/vite-plugin';
 import {defineConfig, type LibraryOptions} from 'vite';
 import dts from 'vite-plugin-dts';
 
@@ -11,6 +12,11 @@ export default defineConfig({
 			rollupTypes: true,
 			tsconfigPath: './tsconfig.app.json',
 			exclude: ['node_modules/'],
+		}),
+		codecovVitePlugin({
+			enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+			bundleName: 'persian-figlet',
+			uploadToken: process.env.CODECOV_TOKEN,
 		}),
 	],
 	build: {
@@ -28,6 +34,8 @@ export default defineConfig({
 		globals: true,
 		setupFiles: './src/test/setup.ts',
 		environment: 'jsdom',
+		reporters: ['junit'],
+		outputFile: 'test-report.junit.xml',
 		coverage: {
 			enabled: true,
 			all: true,

@@ -39,10 +39,17 @@ jobs:
       - name: Run the tests
         run: yarn test
 
-      - name: Upload coverage to Codecov
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: moh3n9595/persian-figlet
 
       - name: Build
         run: yarn build

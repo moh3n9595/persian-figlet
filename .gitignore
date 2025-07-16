@@ -43,3 +43,6 @@ instrumented
 
 # vscode debug config
 .vscode/launch.json
+
+# vitest
+test-report.junit.xml

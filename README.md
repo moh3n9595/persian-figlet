@@ -6,7 +6,7 @@
 <div align="center">
 
 ![CI/CD](https://github.com/moh3n9595/persian-figlet/actions/workflows/build.yml/badge.svg)
-[![Codecov](https://codecov.io/gh/moh3n9595/persian-figlet/branch/main/graph/badge.svg?token=4L1NNC592T)](https://codecov.io/gh/moh3n9595/persian-figlet) [![CodeFactor](https://www.codefactor.io/repository/github/moh3n9595/persian-figlet/badge)](https://www.codefactor.io/repository/github/moh3n9595/persian-figlet)
+[![CodeCov](https://codecov.io/gh/moh3n9595/persian-figlet/graph/badge.svg?token=WN2WK8QQMJ)](https://codecov.io/gh/moh3n9595/persian-figlet) [![CodeFactor](https://www.codefactor.io/repository/github/moh3n9595/persian-figlet/badge)](https://www.codefactor.io/repository/github/moh3n9595/persian-figlet)
 [![NPM](https://img.shields.io/npm/v/persian-figlet.svg)](https://www.npmjs.com/package/persian-figlet)
 [![Size](https://badgen.net/bundlephobia/minzip/persian-figlet)](https://bundlephobia.com/result?p=persian-figlet@latest)
 [![GitHub contributors](https://img.shields.io/github/contributors/moh3n9595/persian-figlet.svg)](https://GitHub.com/moh3n9595/persian-figlet/contributors/)
