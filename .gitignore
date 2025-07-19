@@ -15,6 +15,7 @@ node_modules
 # production
 /build
 /lib
+/website/dist
 
 # misc
 .DS_Store
