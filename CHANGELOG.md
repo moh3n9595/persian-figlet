@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0](https://github.com/moh3n9595/persian-figlet/compare/v0.6.0...v0.7.0) (2025-07-19)
+
+### Features
+
+* add base infra for kerning ([aaefcc0](https://github.com/moh3n9595/persian-figlet/commit/aaefcc0585c86b4ed5abd3f67332730e56297f87))
+* add kerning ([edffdae](https://github.com/moh3n9595/persian-figlet/commit/edffdae671fde0ae10e53301597d978d957a919f))
+* add website ([542fce5](https://github.com/moh3n9595/persian-figlet/commit/542fce524a80f764ff6e3ec3d401f1cacf882cf1))
+
 ## 0.6.0 (2025-07-16)
 
 ### Features
