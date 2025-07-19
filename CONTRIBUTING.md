@@ -64,7 +64,7 @@ After forking the repo, create a branch from `main` with the below structure:
 
    > Use kebab-case style with imperative tense.
    - feature/**add-new-character**
-   - bugfix/**fix-letter-spacing**
+   - bugfix/**fix-char-spacing**
    - feature/**improve-pattern-quality**
 
 > Read [here](https://www.conventionalcommits.org/en/v1.0.0/) for more information about conventions.
@@ -114,7 +114,7 @@ When adding support for new Persian characters:
 - Use `██` (double block) for filled areas
 - Use spaces for empty areas
 - Maintain consistent visual weight across characters
-- Consider how the character connects to adjacent letters
+- Consider how the character connects to adjacent chars
 - Test patterns with various combinations
 
 ### Testing Character Patterns
@@ -178,9 +178,9 @@ feat(patterns): add support for ژ character
 When contributing to Persian Figlet, keep in mind:
 
 - Persian text is written right-to-left (RTL)
-- Letters have different forms based on their position in words
-- Some letters don't connect to following letters
-- Proper spacing between disconnected letters is important
+- Chars have different forms based on their position in words
+- Some chars don't connect to following chars
+- Proper spacing between disconnected chars is important
 - Visual balance and readability in ASCII art form
 
 ## Questions?

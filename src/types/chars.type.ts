@@ -1,4 +1,4 @@
-export enum LetterForm {
+export enum CharForm {
 	ISOLATED = 'isolated',
 	INITIAL = 'initial',
 	MEDIAL = 'medial',
@@ -24,7 +24,7 @@ export interface PrintOptions {
 }
 
 /**
- * Character pattern definition for a specific letter form
+ * Character pattern definition for a specific char form
  */
 export type CharacterPattern = [
 	string,
@@ -43,14 +43,34 @@ export type CharacterPattern = [
 ];
 
 /**
- * Complete character definition with all four forms
+ * Kerning definition for character spacing adjustments
+ */
+export interface KerningDefinition {
+	/** Left kerning distance (negative values pull character left) */
+	left: number;
+	/** Right kerning distance (negative values pull next character closer) */
+	right: number;
+}
+
+/**
+ * Character with pattern and kerning information
+ */
+export interface RenderedCharacter {
+	/** The character pattern */
+	pattern: CharacterPattern;
+	/** The kerning information */
+	kerning: KerningDefinition;
+}
+
+/**
+ * Complete character definition with all four forms and kerning
  */
 export type CharacterDefinition = {
-	[key in LetterForm]: CharacterPattern;
+	[key in CharForm]: RenderedCharacter;
 };
 
 /**
- * Font definition containing all character patterns
+ * Font definition containing all character patterns and kerning
  */
 export type FontDefinition = {
 	[character: string]: CharacterDefinition;
@@ -63,5 +83,5 @@ export interface ProcessedCharacter {
 	/** The character itself */
 	char: string;
 	/** The form this character should take */
-	form: LetterForm;
+	form: CharForm;
 }
