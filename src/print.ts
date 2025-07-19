@@ -1,5 +1,5 @@
 import {FontStyle, type PrintOptions} from './types';
-import {CHAR_HEIGHT, getPattern, processText} from './utils';
+import {applyKerning, getPattern, processText} from './utils';
 
 /**
  * Convert Persian text to ASCII art using figlet-style fonts
@@ -25,20 +25,13 @@ import {CHAR_HEIGHT, getPattern, processText} from './utils';
 export function print(text: string, options: PrintOptions = {}): string {
 	const {font = FontStyle.STANDARD, silent = false} = options;
 
-	// Process text and get character patterns
+	// Process text and get character patterns with kerning
 	const chars = processText(text)
 		.reverse()
 		.map(({char, form}) => getPattern(char, form, font));
 
-	// Initialize lines array for building the output
-	const lines = Array.from({length: CHAR_HEIGHT}, () => '');
-
-	// Build each row of the ASCII art
-	for (let row = 0; row < CHAR_HEIGHT; row++) {
-		for (const pattern of chars) {
-			lines[row] += pattern[row];
-		}
-	}
+	// Apply kerning and build the final output
+	const lines = applyKerning(chars);
 
 	// Join lines to create final output
 	const sentence = lines.join('\n');

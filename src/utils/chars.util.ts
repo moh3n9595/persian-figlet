@@ -1,10 +1,10 @@
 import {
-	CharacterPattern,
 	FontDefinition,
 	FontStyle,
 	CharForm,
 	ProcessedCharacter,
 	KerningDefinition,
+	RenderedCharacter,
 } from '../types';
 
 /** Standard space character for character separation */
@@ -2429,10 +2429,7 @@ const standardFont: FontDefinition = {
 				'     ',
 				'     ',
 			],
-			kerning: {
-				right: -2,
-				left: 0,
-			},
+			kerning: DEFAULT_KERNING,
 		},
 		[CharForm.MEDIAL]: {
 			pattern: [
@@ -2639,20 +2636,83 @@ export function getPattern(
 	char: string,
 	form: CharForm,
 	fontStyle: FontStyle = FontStyle.STANDARD,
-): CharacterPattern {
+): RenderedCharacter {
 	const font = fonts[fontStyle];
 	const charPatterns = font[char];
 
 	if (charPatterns && charPatterns[form]) {
-		return charPatterns[form].pattern;
+		return charPatterns[form];
 	}
 
-	// Fallback to isolated form or space pattern
+	// Fallback to isolated form
 	if (charPatterns && charPatterns[CharForm.ISOLATED]) {
-		return charPatterns[CharForm.ISOLATED].pattern;
+		return charPatterns[CharForm.ISOLATED];
 	}
 
-	return font[' '][CharForm.ISOLATED].pattern;
+	// Fallback to space
+	return font[' '][CharForm.ISOLATED];
+}
+
+/**
+ * Apply kerning to merge overlapping character patterns
+ * @param patterns - Array of rendered characters with patterns and kerning
+ * @returns Array of strings representing the final output lines
+ */
+export function applyKerning(
+	patterns: Array<{pattern: string[]; kerning: {left: number; right: number}}>,
+): string[] {
+	if (patterns.length === 0) return Array(CHAR_HEIGHT).fill('');
+
+	const lines: string[] = Array(CHAR_HEIGHT).fill('');
+	let currentPosition = 0;
+
+	for (let i = 0; i < patterns.length; i++) {
+		const {pattern, kerning} = patterns[i];
+		const leftKerning = kerning.left;
+		const rightKerning = kerning.right;
+
+		// Apply left kerning (adjust starting position)
+		const startPos = Math.max(0, currentPosition + leftKerning);
+
+		// For each line, merge the character pattern
+		for (let row = 0; row < CHAR_HEIGHT; row++) {
+			const currentLine = lines[row];
+			const charLine = pattern[row];
+
+			// Ensure the line is long enough
+			const requiredLength = startPos + charLine.length;
+			const paddedLine = currentLine.padEnd(requiredLength, ' ');
+
+			// Merge character into the line, handling overlaps
+			let newLine = paddedLine.substring(0, startPos);
+
+			for (let j = 0; j < charLine.length; j++) {
+				const pos = startPos + j;
+				const existingChar = pos < paddedLine.length ? paddedLine[pos] : ' ';
+				const newChar = charLine[j];
+
+				// If new character is not space, use it; otherwise keep existing
+				if (newChar !== ' ') {
+					newLine += newChar;
+				} else {
+					newLine += existingChar;
+				}
+			}
+
+			// Add any remaining part of the original line
+			if (startPos + charLine.length < paddedLine.length) {
+				newLine += paddedLine.substring(startPos + charLine.length);
+			}
+
+			lines[row] = newLine;
+		}
+
+		// Update position for next character
+		const charWidth = Math.max(...pattern.map((line) => line.length));
+		currentPosition = startPos + charWidth + rightKerning;
+	}
+
+	return lines;
 }
 
 /**

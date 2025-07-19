@@ -22,6 +22,7 @@
 
 - 🎨 **Multiple Font Styles**: Standard and Slim fonts with distinct visual characteristics
 - 🔤 **Complete Persian Support**: All Persian chars with proper contextual forms
+- ↔️ **Kerning System**: Intelligent character spacing with overlap support for authentic Persian typography
 - 🔗 **Smart Char Connection**: Automatic handling of char joining rules
 - 📝 **TypeScript Support**: Full type definitions and IntelliSense support
 - 🎯 **Easy to Use**: Simple API with sensible defaults
@@ -75,15 +76,12 @@ Will output beautiful ASCII art representation of the Persian text "تست".
 
 1. **Add & Create More Fonts**  
    - Design “Slim”, “Rounded” or “Shadow” variations  
-   - Allow community‑contributed font packs via a simple JSON schema  
+   - Allow community‑contributed font packs via a simple JSON schema
 
-2. **Per‑Character Margins & Kerning**  
-   - Let each glyph declare a custom left/right “margin” override
-
-3. **Ligature & Diacritic Support**  
+2. **Ligature & Diacritic Support**  
    - Render optional diacritics above/below base chars
   
-4. **Interactive Playground & Live Preview**  
+3. **Interactive Playground & Live Preview**  
    - Web demo to type in Persian and see instant Figlet output  
    - Let users tweak spacing, font, and colors in real time  
 
