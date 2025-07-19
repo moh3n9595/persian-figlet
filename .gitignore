@@ -47,3 +47,4 @@ instrumented
 
 # vitest
 test-report.junit.xml
+.vercel

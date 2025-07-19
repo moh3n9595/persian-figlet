@@ -68,6 +68,8 @@ export default [
 			'commitlint.config.js',
 			'lib',
 			'coverage',
+			'website/node_modules',
+			'website/dist',
 		],
 	},
 	eslintConfigPrettier,
