@@ -18,6 +18,12 @@
 
 </div>
 
+## 🌐 Try it Online
+
+**[🚀 Live Demo - Persian Figlet Web Tool](https://persian-figlet.vercel.app)**
+
+Experience Persian Figlet directly in your browser with our interactive web tool.
+
 ## ✨ Features
 
 - 🎨 **Multiple Font Styles**: Standard and Slim fonts with distinct visual characteristics

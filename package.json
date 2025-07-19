@@ -1,12 +1,14 @@
 {
 	"name": "persian-figlet",
-	"private": "false",
 	"version": "0.6.0",
 	"description": "A Figlet-style ASCII art renderer for Persian (Farsi) text with full contextual character shaping and RTL support.",
 	"main": "./lib/persian-figlet.umd.js",
 	"module": "./lib/persian-figlet.es.js",
 	"types": "./lib/index.d.ts",
 	"type": "module",
+	"workspaces": [
+		"website"
+	],
 	"exports": {
 		".": {
 			"import": "./lib/persian-figlet.es.js",
@@ -14,7 +16,7 @@
 		}
 	},
 	"scripts": {
-		"dev": "concurrently --kill-others -n Library,Tests \"yarn build:watch\" \"yarn test:watch\"",
+		"dev": "concurrently --kill-others -n Library,Tests,Website \"yarn build:watch\" \"yarn test:watch\" \"yarn workspace website dev\"",
 		"test:watch": "vitest --watch",
 		"test": "vitest run",
 		"lint": "eslint .",
