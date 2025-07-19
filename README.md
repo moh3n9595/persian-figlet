@@ -5,7 +5,7 @@
 <p align="center">A Figlet-style ASCII art renderer for Persian (Farsi) text with full contextual character shaping and RTL support.</p>
 <div align="center">
 
-![CI/CD](https://github.com/moh3n9595/persian-figlet/actions/workflows/build.yml/badge.svg)
+![CI/CD](https://github.com/moh3n9595/persian-figlet/actions/workflows/build.yml/badge.svg) ![Vercel Deploy](https://deploy-badge.vercel.app/vercel/persian-figlet?name=website)
 [![CodeCov](https://codecov.io/gh/moh3n9595/persian-figlet/graph/badge.svg?token=WN2WK8QQMJ)](https://codecov.io/gh/moh3n9595/persian-figlet) [![CodeFactor](https://www.codefactor.io/repository/github/moh3n9595/persian-figlet/badge)](https://www.codefactor.io/repository/github/moh3n9595/persian-figlet)
 [![NPM](https://img.shields.io/npm/v/persian-figlet.svg)](https://www.npmjs.com/package/persian-figlet)
 [![Size](https://badgen.net/bundlephobia/min/persian-figlet)](https://bundlephobia.com/result?p=persian-figlet@latest)
