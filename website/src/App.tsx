@@ -2,7 +2,7 @@ import {print, FontStyle} from 'persian-figlet';
 import {useState, useEffect, useCallback} from 'react';
 
 import logo from './assets/logo.png';
-import {Icons} from './components/Icon';
+import {Icons} from './components/Icons';
 import {Toast} from './components/Toast';
 
 type Theme = 'light' | 'dark';
@@ -13,6 +13,8 @@ interface AppState {
 	theme: Theme;
 	textColor: string;
 	fontSize: number;
+	lineHeight: number;
+	letterSpacing: number;
 	output: string;
 	showToast: boolean;
 	toastMessage: string;
@@ -25,6 +27,8 @@ function App() {
 		theme: 'light',
 		textColor: '#AB0B37',
 		fontSize: 12,
+		lineHeight: 1.0,
+		letterSpacing: 0,
 		output: '',
 		showToast: false,
 		toastMessage: '',
@@ -121,6 +125,58 @@ function App() {
 		}));
 	}, []);
 
+	const increaseLineHeight = useCallback(() => {
+		setState((prev) => ({
+			...prev,
+			lineHeight: Math.min(prev.lineHeight + 0.1, 2.0), // Max 2.0
+		}));
+	}, []);
+
+	const decreaseLineHeight = useCallback(() => {
+		setState((prev) => ({
+			...prev,
+			lineHeight: Math.max(prev.lineHeight - 0.1, 0.5), // Min 0.5
+		}));
+	}, []);
+
+	const resetLineHeight = useCallback(() => {
+		setState((prev) => ({
+			...prev,
+			lineHeight: 1.0, // Reset to default
+		}));
+	}, []);
+
+	const increaseLetterSpacing = useCallback(() => {
+		setState((prev) => ({
+			...prev,
+			letterSpacing: Math.min(prev.letterSpacing + 1, 10), // Max 10px
+		}));
+	}, []);
+
+	const decreaseLetterSpacing = useCallback(() => {
+		setState((prev) => ({
+			...prev,
+			letterSpacing: Math.max(prev.letterSpacing - 1, -5), // Min -5px
+		}));
+	}, []);
+
+	const resetLetterSpacing = useCallback(() => {
+		setState((prev) => ({
+			...prev,
+			letterSpacing: 0, // Reset to default
+		}));
+	}, []);
+
+	const resetAllSpacing = useCallback(() => {
+		setState((prev) => ({
+			...prev,
+			fontSize: 12,
+			lineHeight: 1.0,
+			letterSpacing: 0,
+		}));
+		showToast('تمام تنظیمات فاصله‌گذاری بازنشانی شد');
+	}, [showToast]);
+
 	return (
 		<div className='app'>
 			<header className='header'>
@@ -216,33 +272,102 @@ function App() {
 									}
 								/>
 							</div>
+						</div>
 
-							<div className='control-item'>
-								<label className='control-label'>
-									اندازه فونت ({state.fontSize}px)
-								</label>
-								<div className='zoom-controls'>
-									<button
-										className='btn btn-secondary zoom-btn'
-										onClick={zoomOut}
-										disabled={state.fontSize <= 8}
-									>
-										<Icons.ZoomOut />
-									</button>
-									<button
-										className='btn btn-secondary zoom-btn'
-										onClick={resetZoom}
-									>
-										<Icons.Reset />
-									</button>
-									<button
-										className='btn btn-secondary zoom-btn'
-										onClick={zoomIn}
-										disabled={state.fontSize >= 24}
-									>
-										<Icons.ZoomIn />
-									</button>
+						<div className='spacing-section'>
+							<h3 className='section-title'>تنظیمات فاصله‌گذاری</h3>
+
+							<div className='spacing-controls'>
+								<div className='spacing-control'>
+									<label className='control-label'>
+										اندازه فونت ({state.fontSize}px)
+									</label>
+									<div className='control-buttons'>
+										<button
+											className='btn btn-secondary control-btn'
+											onClick={zoomOut}
+											disabled={state.fontSize <= 8}
+										>
+											<Icons.Minus />
+										</button>
+										<button
+											className='btn btn-secondary control-btn'
+											onClick={resetZoom}
+										>
+											<Icons.Reset />
+										</button>
+										<button
+											className='btn btn-secondary control-btn'
+											onClick={zoomIn}
+											disabled={state.fontSize >= 24}
+										>
+											<Icons.Plus />
+										</button>
+									</div>
 								</div>
+
+								<div className='spacing-control'>
+									<label className='control-label'>
+										ارتفاع خط ({state.lineHeight.toFixed(1)})
+									</label>
+									<div className='control-buttons'>
+										<button
+											className='btn btn-secondary control-btn'
+											onClick={decreaseLineHeight}
+											disabled={state.lineHeight <= 0.5}
+										>
+											<Icons.Minus />
+										</button>
+										<button
+											className='btn btn-secondary control-btn'
+											onClick={resetLineHeight}
+										>
+											<Icons.Reset />
+										</button>
+										<button
+											className='btn btn-secondary control-btn'
+											onClick={increaseLineHeight}
+											disabled={state.lineHeight >= 2.0}
+										>
+											<Icons.Plus />
+										</button>
+									</div>
+								</div>
+
+								<div className='spacing-control'>
+									<label className='control-label'>
+										فاصله حروف ({state.letterSpacing}px)
+									</label>
+									<div className='control-buttons'>
+										<button
+											className='btn btn-secondary control-btn'
+											onClick={decreaseLetterSpacing}
+											disabled={state.letterSpacing <= -5}
+										>
+											<Icons.Minus />
+										</button>
+										<button
+											className='btn btn-secondary control-btn'
+											onClick={resetLetterSpacing}
+										>
+											<Icons.Reset />
+										</button>
+										<button
+											className='btn btn-secondary control-btn'
+											onClick={increaseLetterSpacing}
+											disabled={state.letterSpacing >= 10}
+										>
+											<Icons.Plus />
+										</button>
+									</div>
+								</div>
+							</div>
+
+							<div className='spacing-actions'>
+								<button className='btn btn-primary' onClick={resetAllSpacing}>
+									<Icons.Reset />
+									بازنشانی همه
+								</button>
 							</div>
 						</div>
 
@@ -270,6 +395,8 @@ function App() {
 									style={{
 										color: state.textColor,
 										fontSize: `${state.fontSize}px`,
+										lineHeight: state.lineHeight,
+										letterSpacing: `${state.letterSpacing}px`,
 									}}
 								>
 									{state.output}
