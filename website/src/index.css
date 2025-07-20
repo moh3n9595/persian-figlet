@@ -247,6 +247,31 @@ body {
 	transform: translateY(-2px);
 }
 
+.zoom-controls {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.zoom-btn {
+	padding: 0.5rem;
+	min-width: 40px;
+	justify-content: center;
+	font-size: 0.75rem;
+}
+
+.zoom-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.zoom-btn:disabled:hover {
+	transform: none;
+	background-color: var(--bg-tertiary);
+	border-color: var(--border-color);
+}
+
 .output-section {
 	background-color: var(--bg-secondary);
 	border-radius: 12px;
@@ -289,6 +314,8 @@ body {
 	color: var(--text-primary);
 	overflow-y: hidden;
 	overflow-x: auto;
+	transition: font-size 0.2s ease;
+	overflow: auto;
 }
 
 .output-placeholder {
@@ -382,6 +409,15 @@ body {
 	.btn {
 		padding: 0.625rem 1rem;
 		font-size: 0.8rem;
+	}
+
+	.zoom-controls {
+		gap: 0.25rem;
+	}
+
+	.zoom-btn {
+		width: 100%;
+		min-width: auto;
 	}
 }
 

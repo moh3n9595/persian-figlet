@@ -12,6 +12,7 @@ interface AppState {
 	font: FontStyle;
 	theme: Theme;
 	textColor: string;
+	fontSize: number;
 	output: string;
 	showToast: boolean;
 	toastMessage: string;
@@ -23,6 +24,7 @@ function App() {
 		font: FontStyle.STANDARD,
 		theme: 'light',
 		textColor: '#AB0B37',
+		fontSize: 12,
 		output: '',
 		showToast: false,
 		toastMessage: '',
@@ -95,6 +97,27 @@ function App() {
 		setState((prev) => ({
 			...prev,
 			theme: prev.theme === 'light' ? 'dark' : 'light',
+		}));
+	}, []);
+
+	const zoomIn = useCallback(() => {
+		setState((prev) => ({
+			...prev,
+			fontSize: Math.min(prev.fontSize + 2, 24), // Max 24px
+		}));
+	}, []);
+
+	const zoomOut = useCallback(() => {
+		setState((prev) => ({
+			...prev,
+			fontSize: Math.max(prev.fontSize - 2, 8), // Min 8px
+		}));
+	}, []);
+
+	const resetZoom = useCallback(() => {
+		setState((prev) => ({
+			...prev,
+			fontSize: 12, // Reset to default
 		}));
 	}, []);
 
@@ -193,6 +216,34 @@ function App() {
 									}
 								/>
 							</div>
+
+							<div className='control-item'>
+								<label className='control-label'>
+									اندازه فونت ({state.fontSize}px)
+								</label>
+								<div className='zoom-controls'>
+									<button
+										className='btn btn-secondary zoom-btn'
+										onClick={zoomOut}
+										disabled={state.fontSize <= 8}
+									>
+										<Icons.ZoomOut />
+									</button>
+									<button
+										className='btn btn-secondary zoom-btn'
+										onClick={resetZoom}
+									>
+										<Icons.Reset />
+									</button>
+									<button
+										className='btn btn-secondary zoom-btn'
+										onClick={zoomIn}
+										disabled={state.fontSize >= 24}
+									>
+										<Icons.ZoomIn />
+									</button>
+								</div>
+							</div>
 						</div>
 
 						<div className='action-buttons'>
@@ -216,7 +267,10 @@ function App() {
 							{state.output ? (
 								<pre
 									className='output-content'
-									style={{color: state.textColor}}
+									style={{
+										color: state.textColor,
+										fontSize: `${state.fontSize}px`,
+									}}
 								>
 									{state.output}
 								</pre>
