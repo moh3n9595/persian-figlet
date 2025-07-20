@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.7.1](https://github.com/moh3n9595/persian-figlet/compare/v0.7.0...v0.7.1) (2025-07-20)
+
+### Features
+
+* add zoom control ([941c67a](https://github.com/moh3n9595/persian-figlet/commit/941c67a13e41de232f8f272fb69c3d533d53245f))
+* **ui:** add line-height and letter-spacing controls ([14a429b](https://github.com/moh3n9595/persian-figlet/commit/14a429bd752b10e2db95c48481fb320523e11bb0))
+
+### Bug Fixes
+
+* **readme:** remove trailing whitespace in ascii art example ([4149217](https://github.com/moh3n9595/persian-figlet/commit/41492172e66eed14a7c5470812bb6276fcf725c3))
+
 ## [0.7.0](https://github.com/moh3n9595/persian-figlet/compare/v0.6.0...v0.7.0) (2025-07-19)
 
 ### Features
