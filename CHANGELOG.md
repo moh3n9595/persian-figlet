@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.0](https://github.com/moh3n9595/persian-figlet/compare/v0.7.1...v0.8.0) (2025-07-21)
+
+### Features
+
+* add cli ([dac5a29](https://github.com/moh3n9595/persian-figlet/commit/dac5a295424a512fd770d30f58a60c9b4d67c098))
+
 ## [0.7.1](https://github.com/moh3n9595/persian-figlet/compare/v0.7.0...v0.7.1) (2025-07-20)
 
 ### Features
