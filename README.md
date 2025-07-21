@@ -26,6 +26,7 @@ Experience Persian Figlet directly in your browser with our interactive web tool
 
 ## ✨ Features
 
+- 💻 **CLI Tool**: Command-line interface for terminal usage with colors and file output
 - 🎨 **Multiple Font Styles**: Standard and Slim fonts with distinct visual characteristics
 - 🔤 **Complete Persian Support**: All Persian chars with proper contextual forms
 - ↔️ **Kerning System**: Intelligent character spacing with overlap support for authentic Persian typography
@@ -47,7 +48,57 @@ yarn add persian-figlet
 
 ## 📖 Usage
 
-### Basic Usage
+### Command Line Interface (CLI)
+
+#### Basic Usage
+```bash
+# Basic text conversion
+persian-figlet "سلام دنیا"
+```
+
+#### Advanced CLI Options
+```bash
+# With colors
+persian-figlet "تست" --color red
+persian-figlet "فارسی" -c blue
+
+# Font selection
+persian-figlet "متن" --font standard
+persian-figlet "نمونه" -f standard
+
+# Output to file
+persian-figlet "ذخیره" --output output.txt
+persian-figlet "فایل" -o result.txt
+
+# List available fonts
+persian-figlet --list-fonts
+
+# Show library information
+persian-figlet --info
+```
+
+#### CLI Colors
+Available colors: `red`, `green`, `blue`, `yellow`, `magenta`, `cyan`, `white`
+
+#### Pipe Usage
+```bash
+# Using with pipes
+echo "پایپ" | xargs persian-figlet
+persian-figlet "رنگی" -c green | less
+
+# Save colored output
+persian-figlet "رنگی" -c red > colored-output.txt
+```
+
+#### CLI Help
+```bash
+persian-figlet --help
+persian-figlet -v  # version
+```
+
+### JavaScript/TypeScript Library
+
+#### Basic Usage
 
 ```typescript
 import { print, FontStyle } from 'persian-figlet';

@@ -1,0 +1,21 @@
+{
+	"name": "cli",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"chalk": "^5.4.1",
+		"commander": "^14.0.0",
+		"fs": "^0.0.1-security",
+		"persian-figlet": "*"
+	},
+	"devDependencies": {
+		"typescript": "*",
+		"vite": "*"
+	}
+}

@@ -5,9 +5,11 @@
 	"main": "./lib/persian-figlet.umd.js",
 	"module": "./lib/persian-figlet.es.js",
 	"types": "./lib/index.d.ts",
+	"bin": "./lib/cli.js",
 	"type": "module",
 	"workspaces": [
-		"website"
+		"website",
+		"cli"
 	],
 	"exports": {
 		".": {
@@ -16,7 +18,7 @@
 		}
 	},
 	"scripts": {
-		"dev": "concurrently --kill-others -n Library,Tests,Website \"yarn build:watch\" \"yarn test:watch\" \"yarn workspace website dev\"",
+		"dev": "concurrently --kill-others -n Library,Tests,Website \"yarn build:lib:watch\" \"yarn test:watch\" \"yarn workspace website dev\"",
 		"test:watch": "vitest --watch",
 		"test": "vitest run",
 		"lint": "eslint .",
@@ -26,8 +28,10 @@
 		"postinstall": "husky",
 		"prepack": "pinst --disable",
 		"postpack": "pinst --enable",
-		"build": "vite build",
-		"build:watch": "vite build --watch",
+		"build:cli": "yarn workspace cli build",
+		"build:lib": "vite build",
+		"build": "yarn build:lib && yarn build:cli",
+		"build:lib:watch": "vite build --watch",
 		"release:info": "release-it --release-version",
 		"release": "release-it"
 	},

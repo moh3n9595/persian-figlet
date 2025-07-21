@@ -11,7 +11,7 @@ export default defineConfig({
 		dts({
 			rollupTypes: true,
 			tsconfigPath: './tsconfig.app.json',
-			exclude: ['node_modules/'],
+			exclude: ['node_modules/', 'src/test/', '/cli', 'website/'],
 		}),
 		codecovVitePlugin({
 			enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
@@ -40,6 +40,7 @@ export default defineConfig({
 			enabled: true,
 			all: true,
 			include: ['src/**/*.{ts,tsx}'],
+			exclude: ['website/', 'cli/'],
 		},
 	},
 });
