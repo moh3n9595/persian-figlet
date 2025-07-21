@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.8.0](https://github.com/moh3n9595/persian-figlet/compare/v0.7.1...v0.8.0) (2025-07-21)
+## [0.9.0](https://github.com/moh3n9595/persian-figlet/compare/v0.7.1...v0.9.0) (2025-07-21)
 
 ### Features
 
