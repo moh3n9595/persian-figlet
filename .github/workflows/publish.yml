@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install --check-cache
 
       - name: Run Prettier
         run: yarn prettier
@@ -58,7 +58,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install --check-cache
 
       - name: Configure NPM authentication
         run: yarn config set npmAuthToken ${{ secrets.NPM_TOKEN }}
